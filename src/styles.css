@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+th.topAlign {
+    vertical-align: top;
+    text-align: left;
+}
+
+td.number {
+    text-align: right;
+}
+td.volume {
+    text-align: right;
+    color: blue;
+}
+td.volatile {
+    text-align: right;
+    color: darkblue;
+}
+span.down {
+    text-align: right;
+    color: red;
+}
+span.up {
+    text-align: right;
+    color: green;
+}
+td.gapDown, td.down {
+    text-align: right;
+    color: red;
+    font-weight: bold;
+}
+td.gapUp, td.up {
+    text-align: right;
+    color: green;
+    font-weight: bold;
+}
+td.closeDown {
+    text-align: right;
+    color: red;
+}
+td.closeUp {
+    text-align: right;
+    color: green;
+}
+td.date {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+span.alert {
+    font-weight: bold;
+    color: red;
+}

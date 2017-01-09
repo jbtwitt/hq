@@ -1,0 +1,65 @@
+<!--<h1>
+  {{title}}
+</h1>
+
+<div>
+  <md-card>
+    <button md-button>FLAT</button>
+    <button md-raised-button md-tooltip="This is a tooltip!">RAISED</button>
+    <button md-raised-button color="primary">PRIMARY RAISED</button>
+    <button md-raised-button color="accent">ACCENT RAISED</button>
+  </md-card>
+</div>-->
+<md-sidenav-layout fullscreen>
+
+    <md-sidenav #start mode="side">
+        <!--<md-icon>menu</md-icon>-->
+    <!--<h3>{{title}}</h3>-->
+    <br />
+
+    <!--<button md-icon-button [md-menu-trigger-for]="menu">
+        <md-icon>more_vert</md-icon>
+    </button>
+    <md-menu x-position="before" #menu="mdMenu">
+        <button md-menu-item (click)="openDialog()">Settings</button>
+        <button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle theme</button>
+        <button md-menu-item>Help</button>
+    </md-menu>-->
+
+    <a md-button routerLink="/hq" routerLinkActive="active">HQ</a><br>
+    <a md-button routerLink="/hq-stat" routerLinkActive="active">HQ Stat</a><br>
+    <a md-button routerLink="/iq" routerLinkActive="active">IQ</a><br>
+    <!--<a md-button routerLink="/home" routerLinkActive="active">Home</a><br>-->
+
+    <!--<br><br><button md-button #closeStartButton (click)="start.close()">Close Menu</button>-->
+    </md-sidenav>
+
+    <table width="100%">
+        <tr>
+        <td valign="top" width="16px">
+            <span (click)="start.toggle()" style="cursor:move;">
+                <md-icon style="width:8px">menu</md-icon>
+            </span>
+        </td>
+        <td>
+            <!--<md-progress-circle mode="indeterminate"></md-progress-circle>
+            <md-spinner></md-spinner>-->
+        <router-outlet></router-outlet>
+        </td>
+        </tr>
+    </table>
+
+</md-sidenav-layout>
+
+    <!--<md-tab-group>
+        <md-tab>
+            <template md-tab-content>
+            <a md-button routerLink="/budget-total" routerLinkActive="active">t Budget Total</a><br>
+            </template>
+        </md-tab>
+        <md-tab>
+            <template md-tab-content>
+            <a md-button routerLink="/home" routerLinkActive="active">t Home</a><br>
+            </template>
+        </md-tab>
+    </md-tab-group>-->

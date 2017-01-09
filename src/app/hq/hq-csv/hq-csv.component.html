@@ -1,0 +1,46 @@
+<div *ngIf="hqTicker != null">
+
+<div>
+    <a target="blank" href="https://finance.yahoo.com/quote/{{hqTicker.ticker}}?p={{hqTicker.ticker}}" md-button>{{hqTicker.ticker}}</a>
+    <a target="blank" md-tooltip="View Yahoo Chart {{hqTicker.ticker}}"
+      href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon></a>
+    <a md-button (click)="btnSortByClose()"><md-icon>sort</md-icon>Close</a>
+</div>
+
+<table>
+  <tr *ngFor="let hq of hqs; let i=index">
+    <th>{{hq.date}}</th>
+    <td>
+      {{hq.close | number}}
+    </td>
+    <td [ngClass]="{closeDown: hq.close < hq.prevClose, closeUp: hq.close > hq.prevClose}">{{hq.close-hq.prevClose | number}}</td>
+    <td class="volume">{{hq.volume}}</td>
+    <td>{{hq.open | number}}</td>
+    <td>{{hq.high | number}}</td>
+    <td>{{hq.low | number}}</td>
+    <td md-tooltip="open %"
+      [ngClass]="{gapDown: (hq.open-hq.prevClose)/hq.prevClose <= -0.03, gapUp: (hq.open-hq.prevClose)/hq.prevClose >= 0.03}">
+      <span [ngClass]="{down: hq.open < hq.prevClose, up: hq.open > hq.prevClose}">
+        {{ (hq.open-hq.prevClose)/hq.prevClose | percent }}
+      </span>
+    </td>
+    <td md-tooltip="close %">
+      <span [ngClass]="{down: hq.close < hq.prevClose, up: hq.close > hq.prevClose}">
+        {{ (hq.close-hq.prevClose)/hq.prevClose | percent}}
+      </span>
+    </td>
+    <td>{{ (hq.high-hq.prevClose)/hq.prevClose | percent}}</td>
+    <td>{{ (hq.low-hq.prevClose)/hq.prevClose | percent}}</td>
+    <td class="volatile">{{ (hq.high-hq.low)/hq.prevClose | percent}}</td>
+    <td>
+    <span md-tooltip="{{(hq.close - hq.open)/hq.prevClose | percent}}">
+          {{hqStatService.isHqDoji(hq) ? 'Doji' : ''}}</span>
+    <span>{{hqStatService.isHqEngulfing(hq, hqs[i+1]) ? 'Engulfing' : ''}}</span>
+    <span>{{hqStatService.isHqHammer(hq) ? 'Hammer' : ''}}</span>
+    </td>
+  </tr>
+</table>
+
+<pre>{{hqTicker.csv}}</pre>
+
+</div>

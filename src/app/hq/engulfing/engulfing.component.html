@@ -1,0 +1,27 @@
+<div *ngIf="hqTickers != null">
+<table>
+  <tr>
+    <th>
+      <select (change)="onDayChange()" [(ngModel)]="dayIndex">
+        <option *ngFor="let day of days" [value]="day">day {{day}}</option>
+      </select>
+    </th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let hqTicker of engulfingTickers">
+    <td>
+      <a target="blank" md-tooltip="View Yahoo Chart {{hqTicker.ticker}}"
+          href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon> {{hqTicker.ticker}}</a>
+    </td>
+    <td>
+      <span *ngIf="hqTicker.hqs != null">
+      {{ hqStatService.hqHighLow(hqTicker, dayIndex) | percent }}
+      </span>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>

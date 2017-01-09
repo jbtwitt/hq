@@ -1,0 +1,50 @@
+<md-tab-group>
+  <md-tab label="Data">
+    <md-card>
+      <md-card-content>
+      <table>
+        <tr *ngFor="let hqStat of hqStats">
+          <td>
+            <a target="blank" href="https://finance.yahoo.com/quote/{{hqStat.ticker}}?p={{hqStat.ticker}}" md-raised-button>{{hqStat.ticker}}</a>
+          </td>
+          <td class="date">{{ hqStat.lastHq.date }}</td>
+          <td class="number">{{ hqStat.lastHq.close | number }}</td>
+          <td class="date" md-tooltip="min date">{{ hqStat.hqCloseMinMax.minHq.date }}</td>
+          <td class="date" md-tooltip="max date">{{ hqStat.hqCloseMinMax.maxHq.date }}</td>
+          <td>
+            [<span *ngFor="let v of hqStat.deltaVolatiles">
+              {{ v | number }},
+            </span>]
+          </td>
+          <td>
+            [<span *ngFor="let b2b of hqStat.b2bs">
+              ({{ b2b.upDays }},{{ b2b.downDays }},{{ b2b.eqDays }})
+            </span>]
+          </td>
+        </tr>
+      </table>
+      </md-card-content>
+    </md-card>
+  </md-tab>
+  <md-tab label="Stat Alert">
+    <md-card>
+      <md-card-content>
+      <table>
+        <tr *ngFor="let hqStat of hqStats">
+          <td>
+            <a target="blank" href="https://finance.yahoo.com/quote/{{hqStat.ticker}}?p={{hqStat.ticker}}" md-raised-button>{{hqStat.ticker}}</a>
+          </td>
+          <td class="date">{{ hqStat.lastHq.date }}</td>
+          <td class="number">{{ hqStat.lastHq.close | number }}</td>
+          <td>
+            <span class="alert" *ngIf="hqStat.lastHq.date == hqStat.hqCloseMinMax.minHq.date">Min</span>
+            <span class="alert" *ngIf="hqStat.lastHq.date == hqStat.hqCloseMinMax.maxHq.date">Max</span>
+          </td>
+          <td>{{hqStat.hqStatHighLowInLastDays.lowInLastDays}}</td>
+          <td>{{hqStat.hqStatHighLowInLastDays.highInLastDays}}</td>
+        </tr>
+      </table>
+      </md-card-content>
+    </md-card>
+  </md-tab>
+</md-tab-group>

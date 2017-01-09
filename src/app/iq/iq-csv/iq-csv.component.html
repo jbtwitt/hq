@@ -1,0 +1,99 @@
+<md-card>
+  <md-card-content>
+  <table>
+    <tr>
+    <th class="topAlign">
+      <md-list>
+        <md-list-item *ngFor="let ticker of tickers">
+          <button md-button md-tooltip="View Download IQ" (click)="btnTickerIq(ticker)">{{ticker}}</button>
+        </md-list-item>
+      </md-list>
+    </th>
+    <td>
+    <a target="blank" md-tooltip="View Yahoo Summary"
+      href="https://finance.yahoo.com/quote/{{selectedTicker}}?p={{selectedTicker}}" md-button>
+      {{selectedTicker}}</a>
+
+    <!-- hq -->
+    <table *ngIf="hq != null">
+      <tr>
+        <td>
+          {{hq.close | number}}
+        </td>
+        <td [ngClass]="{closeDown: hq.close < hq.prevClose, closeUp: hq.close > hq.prevClose}">{{hq.close-hq.prevClose | number}}</td>
+        <td class="volume">{{hq.volume}}</td>
+        <td>{{hq.open | number}}</td>
+        <td>{{hq.high | number}}</td>
+        <td>{{hq.low | number}}</td>
+        <td md-tooltip="open %"
+          [ngClass]="{gapDown: (hq.open-hq.prevClose)/hq.prevClose <= -0.03, gapUp: (hq.open-hq.prevClose)/hq.prevClose >= 0.03}">
+          <span [ngClass]="{down: hq.open < hq.prevClose, up: hq.open > hq.prevClose}">
+            {{ (hq.open-hq.prevClose)/hq.prevClose | percent }}
+          </span>
+        </td>
+        <td md-tooltip="close %">
+          <span [ngClass]="{down: hq.close < hq.prevClose, up: hq.close > hq.prevClose}">
+            {{ (hq.close-hq.prevClose)/hq.prevClose | percent}}
+          </span>
+        </td>
+        <td>{{ (hq.high-hq.prevClose)/hq.prevClose | percent}}</td>
+        <td>{{ (hq.low-hq.prevClose)/hq.prevClose | percent}}</td>
+        <td class="volatile">{{ (hq.high-hq.low)/hq.prevClose | percent}}</td>
+        <td>
+          {{iqTicker.prevClose | number}}
+        </td>
+      </tr>
+    </table>
+
+    <table>
+    <tr>
+    <!-- iqs -->
+    <td>
+      <table *ngIf="iqTicker != null">
+        <tr *ngFor="let iq of iqTicker.iqs; let i=index">
+          <!--<td class="number">{{iq.tick}}</td>-->
+          <td>{{iq.timestamp | date: 'yyyyMMdd HHmmss'}}</td>
+          <td class="number">
+            <span [ngClass]="{down: iq.close < iq.prevClose, up: iq.close > iq.prevClose}">
+              {{iq.close | number}}
+            </span>
+          </td>
+          <td class="number">{{iq.high | number}}</td>
+          <td class="number">{{iq.low | number}}</td>
+          <td class="number">{{iq.open | number}}</td>
+          <td class="number">{{iq.volume | number}}</td>
+          <!--<td class="number">{{iq.prevClose | number}}</td>-->
+        </tr>
+      </table>
+    </td>
+    <!-- blend iqs -->
+    <td valign="top">
+          <table>
+            <tr *ngFor="let iq of blendIqs; let i=index">
+              <!--<td class="number">{{iq.tick}}</td>-->
+              <td>{{iq.timestamp | date: 'yyyyMMdd HHmmss'}}</td>
+              <td [ngClass]="{up: isIqCloseUp(i), down: isIqCloseUp(i)==false, number: 1}">
+                {{iq.close | number}}</td>
+              <td class="number">{{iq.high | number}}</td>
+              <td class="number">{{iq.low | number}}</td>
+              <td class="number">{{iq.open | number}}</td>
+              <td class="number">{{iq.volume | number}}</td>
+              <td>{{ isIqEngulfing(i) ? 'Engulf' : '' }}</td>
+            </tr>
+          </table>
+    </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+          <pre>{{csv}}</pre>
+      </td>
+    </tr>
+    </table>
+
+    </td>
+    </tr>
+  </table>
+
+  </md-card-content>
+</md-card>
