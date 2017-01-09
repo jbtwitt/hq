@@ -1,12 +1,3 @@
-#
-Up Trend: High High | High Low, Close > Open
-    * Bullish: Open, Close, High, Low are all > prevClose and close at high area
-Dn Trend: Low High : Low Low
-Mix Trend: [ High High | Low Low ] [ Low High | High Low ]
-
-
-
-
 # Angular2
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
