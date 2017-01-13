@@ -20,6 +20,7 @@ export class HqStatBack2Back {
     upDays: number = 0;
     dnDays: number = 0;
     eqDays: number = 0;
+    delta: number;
 }
 export class HqStatHighLowInLastDays {
     highInLastDays: number = 0;

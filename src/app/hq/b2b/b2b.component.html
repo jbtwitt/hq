@@ -4,7 +4,7 @@
       {{ b2b.upDays > 0 ? 'up ' + b2b.upDays : '' }}
       {{ b2b.dnDays > 0 ? 'down ' + b2b.dnDays : '' }}
       {{ b2b.eqDays > 0 ? 'eq ' + b2b.eqDays : '' }}
-      days ( {{ diffs[i] != null ? (diffs[i] | percent) : '' }} )
+      days {{ b2b.delta | percent }}
     </option>
   </select>
 </div>
