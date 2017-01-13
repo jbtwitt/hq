@@ -16,7 +16,7 @@
       <a target="blank" md-tooltip="View Yahoo Chart {{hqTicker.ticker}}"
           href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon></a>
     </td>
-    <td><app-hq-b2b [b2bs]="getB2bs(hqTicker)"></app-hq-b2b></td>
+    <td><app-hq-b2b [hq-ticker]="hqTicker" [day-index]="dayIndex"></app-hq-b2b></td>
     <td>{{ oneStick(hqTicker) }}</td>
     <td>{{ twoSticks(hqTicker) }}</td>
   </tr>

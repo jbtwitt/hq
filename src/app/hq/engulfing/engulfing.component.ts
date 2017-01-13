@@ -6,7 +6,6 @@ import { HqStatBack2Back } from '../../models/stat.model';
 import { HqStatService } from '../../shared/hq-stat.service';
 
 import { CandleStick } from '../../shared/candlestick.class';
-import { HqStatClass } from '../../shared/hq-stat.class';
 // import { B2bComponent } from '../b2b/b2b.component';
 
 @Component({
@@ -46,10 +45,6 @@ export class EngulfingComponent implements OnInit, OnChanges, DoCheck {
     // console.log('day change' + this.dayIndex);
     // debugger;
     this.dayIndex = parseInt(''+this.dayIndex);
-  }
-  getB2bs(hqTicker: HqTicker): HqStatBack2Back[] {
-    // if (hqTicker == null || hqTicker.hqs == null) return null;
-    return new HqStatClass(hqTicker, this.dayIndex).getB2bs();
   }
   oneStick(hqTicker: HqTicker): string {
     return new CandleStick(hqTicker, this.dayIndex).oneStick();
