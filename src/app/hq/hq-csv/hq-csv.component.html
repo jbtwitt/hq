@@ -35,7 +35,6 @@
     <td>
     <span md-tooltip="{{(hq.close - hq.open)/hq.prevClose | percent}}">
           {{hqStatService.isHqDoji(hq) ? 'Doji' : ''}}</span>
-    <span>{{hqStatService.isHqEngulfing(hq, hqs[i+1]) ? 'Engulfing' : ''}}</span>
     <span>{{hqStatService.isHqHammer(hq) ? 'Hammer' : ''}}</span>
     </td>
   </tr>

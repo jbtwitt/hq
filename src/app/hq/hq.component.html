@@ -1,4 +1,13 @@
 <md-tab-group>
+
+  <md-tab label="Candle">
+    <md-card>
+      <md-card-content>
+        <app-engulfing [hq-tickers]="hqTickers"></app-engulfing>
+      </md-card-content>
+    </md-card>
+  </md-tab>
+
   <md-tab label="Tickers">
     <md-card>
       <md-card-content>
@@ -21,12 +30,11 @@
             <td class="down" md-tooltip="Lowest date: {{hqTicker.hqs[hqTicker.hqMinIndex].date}}">{{hqTicker.hqMinIndex}}</td>
             <td class="up" md-tooltip="Highest date: {{hqTicker.hqs[hqTicker.hqMaxIndex].date}}">{{hqTicker.hqMaxIndex}}</td>
 
-            <td *ngFor="let i of [0, 1, 2]">
-            <span>{{hqStatService.isEngulfing(hqTicker,i) ? 'Engulfing' : ''}}</span>
+            <!--<td *ngFor="let i of [0, 1, 2]">
             <span md-tooltip="{{(hqTicker.hqs[i].close - hqTicker.hqs[i].open)/hqTicker.hqs[i].prevClose | percent}}">
               {{hqStatService.isDoji(hqTicker,i) ? 'Doji' : ''}}</span>
             <span>{{hqStatService.isHammer(hqTicker,i) ? 'Hammer' : ''}}</span>
-            </td>
+            </td>-->
 
           </tr>
         </table>
@@ -54,15 +62,6 @@
     </table>
     </md-card-content>
   </md-card>
-  </md-tab>
-
-
-  <md-tab label="Engulfing">
-    <md-card>
-      <md-card-content>
-        <app-engulfing [hq-tickers]="hqTickers"></app-engulfing>
-      </md-card-content>
-    </md-card>
   </md-tab>
 
 

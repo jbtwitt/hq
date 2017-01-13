@@ -18,7 +18,7 @@ export class HqStat {
 }
 export class HqStatBack2Back {
     upDays: number = 0;
-    downDays: number = 0;
+    dnDays: number = 0;
     eqDays: number = 0;
 }
 export class HqStatHighLowInLastDays {

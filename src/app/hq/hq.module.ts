@@ -10,6 +10,7 @@ import { HqRoutingModule } from './hq.routing'
 import { HqComponent } from './hq.component';
 import { HqCsvComponent } from './hq-csv/hq-csv.component';
 import { EngulfingComponent } from './engulfing/engulfing.component';
+import { B2bComponent } from './b2b/b2b.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { EngulfingComponent } from './engulfing/engulfing.component';
   declarations: [
     HqComponent,
     HqCsvComponent,
-    EngulfingComponent
+    EngulfingComponent,
+    B2bComponent
   ],
   providers: [
     HqDataService

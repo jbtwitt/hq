@@ -22,6 +22,11 @@ export const HqUtils = {
                 parseFloat(q[4]),
                 parseInt(q[5]),
                 parseFloat(q[6]));
+
+            if (hq.close != hq.adjClose) {  // split
+                hq.close = hq.adjClose;
+            }
+
             hqs.push(hq);
             if (prevHq != null) {
                 // calculate extended info

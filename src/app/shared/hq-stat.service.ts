@@ -4,29 +4,13 @@ import { environment } from '../../environments/environment';
 import { Hq, HqTicker } from '../models/hq.model';
 import { HqStat, HqStatBack2Back, HqStatHighLowInLastDays, HqStatMinMax } from '../models/stat.model';
 import { CandlestickPatternDef, PatternDef } from '../models/stat.model';
-import { HqUtils } from '../shared/hq-utils';
+import { HqUtils } from './hq-utils';
+import { HqStatClass } from './hq-stat.class';
 
 @Injectable()
 
 export class HqStatService {
 
-  isEngulfing(hqTicker: HqTicker, dayIdx: number=0): boolean {
-    return this.isHqEngulfing(hqTicker.hqs[dayIdx], hqTicker.hqs[dayIdx + 1]);
-    // let hq0 = hqTicker.hqs[dayIdx];
-    // let hq1 = hqTicker.hqs[dayIdx + 1];
-    // // engulfing: high-high & low-low
-    // if (hq0.high > hq1.high && hq0.low < hq1.low) {
-    //   return true;
-    // }
-    // return false;
-  }
-  isHqEngulfing(hq: Hq, hq1: Hq): boolean {
-    // engulfing: high-high & low-low
-    if (hq1 != null && hq.high > hq1.high && hq.low < hq1.low) {
-      return true;
-    }
-    return false;
-  }
   isDoji(hqTicker: HqTicker, dayIdx: number=0): boolean {
     return this.isHqDoji(hqTicker.hqs[dayIdx]);
   }
@@ -63,7 +47,7 @@ export class HqStatService {
         hqStat.deltaVolatiles = this.getDeltaVolatile(hqs);
         for (let i=0; i<hqs.length;) {
             let b2b = this.getBack2Back(hqs, i);
-            i += b2b.upDays + b2b.downDays + b2b.eqDays;
+            i += b2b.upDays + b2b.dnDays + b2b.eqDays;
             hqStat.b2bs.push(b2b);
         }
         return hqStat;
@@ -128,7 +112,7 @@ export class HqStatService {
             if (upFlag && up) {
                 b2b.upDays ++;
             } else if (downFlag && dn) {
-                b2b.downDays ++;
+                b2b.dnDays ++;
             } else if (eqFlag && eq) {
                 b2b.eqDays ++;
             } else {

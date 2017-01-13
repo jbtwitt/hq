@@ -1,0 +1,9 @@
+<div *ngIf="b2bs != null">
+  <select>
+    <option *ngFor="let b2b of b2bs">
+      {{ b2b.upDays > 0 ? 'up ' + b2b.upDays : '' }}
+      {{ b2b.dnDays > 0 ? 'down ' + b2b.dnDays : '' }}
+      {{ b2b.eqDays > 0 ? 'eq ' + b2b.eqDays : '' }}
+    </option>
+  </select>
+</div>
