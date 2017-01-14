@@ -11,7 +11,10 @@
     <th>2 Sticks</th>
   </tr>
   <tr *ngFor="let hqTicker of hqTickers">
-    <td>{{hqTicker.ticker}}</td>
+    <td>
+        <a target="blank" md-tooltip="View Yahoo Summary"
+            href="https://finance.yahoo.com/quote/{{hqTicker.ticker}}?p={{hqTicker.ticker}}" md-button>{{hqTicker.ticker}}</a>
+    </td>
     <td>
       <a target="blank" md-tooltip="View Yahoo Chart {{hqTicker.ticker}}"
           href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon></a>
