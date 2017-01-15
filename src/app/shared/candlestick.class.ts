@@ -43,15 +43,10 @@ export class CandleStick {
     }
     run(): string[] {
         let patterns = new Array<string>();
-        let pattern = this.twoSticks();
-        if (pattern != '') {
-            patterns.push(pattern);
-        }
-        pattern = this.oneStick();
-        if (pattern != '') {
-            patterns.push(pattern);
-        }
-        return patterns;
+        patterns.push(this.threeSticks());
+        patterns.push(this.twoSticks());
+        patterns.push(this.oneStick());
+        return patterns.filter((value: string) => value != '');
     }
     oneStick(): string {
         if (this.hq0.open == this.hq0.close) {
@@ -113,6 +108,25 @@ export class CandleStick {
                 // if (this.countUpDays(2) >= 2) return 'bearish dark-cloud cover';
                 return 'bearish dark-cloud cover';
             }
+        }
+        return '';
+    }
+    threeSticks(): string {
+        // bullish
+        if ((this.hq2.close < this.hq2.prevClose && this.hq2.close < this.hq2.open)
+            && (this.hq1.open < this.hq2.close && this.hq1.close < this.hq2.close)
+            && ((this.hq1.high - this.hq1.low) < (this.hq2.open - this.hq2.close))  // day 2 is small stick
+            && (this.hq0.close > this.hq0.open && this.hq0.close > this.hq2.close)
+        ) {
+            return 'morning star';  // downtrend reversal pattern
+        }
+        // bearish
+        else if ((this.hq2.close > this.hq2.prevClose && this.hq2.close > this.hq2.open)
+            && (this.hq1.open > this.hq2.close && this.hq1.close > this.hq2.close)
+            && ((this.hq1.high - this.hq1.low) < (this.hq2.close - this.hq2.open))  // day 2 is small stick
+            && (this.hq0.close < this.hq0.open && this.hq0.close < this.hq2.close)
+        ) {
+            return 'evening star';  // uptrend reversal pattern
         }
         return '';
     }
