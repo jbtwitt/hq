@@ -41,6 +41,18 @@ export class CandleStick {
         this.hq1 = hqTicker.hqs[day + 1];
         this.hq2 = hqTicker.hqs[day + 2];
     }
+    run(): string[] {
+        let patterns = new Array<string>();
+        let pattern = this.twoSticks();
+        if (pattern != '') {
+            patterns.push(pattern);
+        }
+        pattern = this.oneStick();
+        if (pattern != '') {
+            patterns.push(pattern);
+        }
+        return patterns;
+    }
     oneStick(): string {
         if (this.hq0.open == this.hq0.close) {
             if (this.hq0.close == this.hq0.high) {

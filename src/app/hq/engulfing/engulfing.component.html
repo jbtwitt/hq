@@ -2,13 +2,19 @@
 <table>
   <tr>
     <td colspan="2">
+      day:
       <select (change)="onDayChange()" [(ngModel)]="dayIndex">
-        <option *ngFor="let day of days" [value]="day">day {{day}}</option>
+        <option *ngFor="let day of days" [value]="day">{{day}}</option>
       </select>
     </td>
+    <th>date</th>
+    <th>close</th>
     <th>b2b</th>
-    <th>1 Stick</th>
-    <th>2 Sticks</th>
+    <th>candlestick</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <tr *ngFor="let hqTicker of hqTickers">
     <td>
@@ -19,9 +25,21 @@
       <a target="blank" md-tooltip="View Yahoo Chart {{hqTicker.ticker}}"
           href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon></a>
     </td>
+
+    <td>{{hqTicker.hqs[dayIndex].date}}</td>
+    <td [ngClass]="{up: hqTicker.hqs[0].close > hqTicker.hqs[0].prevClose, down: hqTicker.hqs[0].close < hqTicker.hqs[0].prevClose}">
+      {{hqTicker.hqs[dayIndex].close | number}}</td>
+
     <td><app-hq-b2b [hq-ticker]="hqTicker" [day-index]="dayIndex"></app-hq-b2b></td>
-    <td>{{ oneStick(hqTicker) }}</td>
-    <td>{{ twoSticks(hqTicker) }}</td>
+    <td><app-stick [hq-ticker]="hqTicker" [day-index]="dayIndex"></app-stick></td>
+
+    <td class="down" md-tooltip="lowest days in last 5">
+      {{hqStatService.hqStatHighLowInLastDays(hqTicker.hqs).lowInLastDays}}</td>
+    <td class="up" md-tooltip="highest days in last 5">
+      {{hqStatService.hqStatHighLowInLastDays(hqTicker.hqs).highInLastDays}}</td>
+    <td class="down" md-tooltip="Lowest date: {{hqTicker.hqs[hqTicker.hqMinIndex].date}}">{{hqTicker.hqMinIndex}}</td>
+    <td class="up" md-tooltip="Highest date: {{hqTicker.hqs[hqTicker.hqMaxIndex].date}}">{{hqTicker.hqMaxIndex}}</td>
+
   </tr>
 </table>
 </div>

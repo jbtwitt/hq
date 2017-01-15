@@ -9,7 +9,7 @@ import { CandleStick } from '../../shared/candlestick.class';
 // import { B2bComponent } from '../b2b/b2b.component';
 
 @Component({
-  selector: 'app-engulfing',
+  selector: 'app-ticker-list',
   templateUrl: './engulfing.component.html',
   styleUrls: ['./engulfing.component.css']
 })

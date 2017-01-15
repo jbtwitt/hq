@@ -1,14 +1,14 @@
 <md-tab-group>
 
-  <md-tab label="Candle">
+  <md-tab label="Tickers">
     <md-card>
       <md-card-content>
-        <app-engulfing [hq-tickers]="hqTickers"></app-engulfing>
+        <app-ticker-list [hq-tickers]="hqTickers"></app-ticker-list>
       </md-card-content>
     </md-card>
   </md-tab>
 
-  <md-tab label="Tickers">
+  <!--<md-tab label="Tickers">
     <md-card>
       <md-card-content>
         <table>
@@ -29,18 +29,11 @@
               {{hqStatService.hqStatHighLowInLastDays(hqTicker.hqs).highInLastDays}}</td>
             <td class="down" md-tooltip="Lowest date: {{hqTicker.hqs[hqTicker.hqMinIndex].date}}">{{hqTicker.hqMinIndex}}</td>
             <td class="up" md-tooltip="Highest date: {{hqTicker.hqs[hqTicker.hqMaxIndex].date}}">{{hqTicker.hqMaxIndex}}</td>
-
-            <!--<td *ngFor="let i of [0, 1, 2]">
-            <span md-tooltip="{{(hqTicker.hqs[i].close - hqTicker.hqs[i].open)/hqTicker.hqs[i].prevClose | percent}}">
-              {{hqStatService.isDoji(hqTicker,i) ? 'Doji' : ''}}</span>
-            <span>{{hqStatService.isHammer(hqTicker,i) ? 'Hammer' : ''}}</span>
-            </td>-->
-
           </tr>
         </table>
       </md-card-content>
     </md-card>
-  </md-tab>
+  </md-tab>-->
 
 
   <md-tab label="HQ({{hqLen-2}}) CSV">

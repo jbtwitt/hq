@@ -1,0 +1,7 @@
+<div *ngIf="patterns != null && patterns.length > 0">
+  <select>
+    <option *ngFor="let pattern of patterns">
+      {{pattern}} ({{patterns.length}})
+    </option>
+  </select>
+</div>
