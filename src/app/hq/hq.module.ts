@@ -12,6 +12,7 @@ import { HqCsvComponent } from './hq-csv/hq-csv.component';
 import { EngulfingComponent } from './engulfing/engulfing.component';
 import { B2bComponent } from './b2b/b2b.component';
 import { StickComponent } from './stick/stick.component';
+import { SmaComponent } from './sma/sma.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { StickComponent } from './stick/stick.component';
     HqCsvComponent,
     EngulfingComponent,
     B2bComponent,
-    StickComponent
+    StickComponent,
+    SmaComponent
   ],
   providers: [
     HqDataService
