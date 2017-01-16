@@ -11,5 +11,5 @@ export const environment = {
     inverseTickers: "inverseTickersArray"
   },
   csvFolder: "data/csv",
-  hqParseLength: 20
+  hqParseLength: 60
 };
