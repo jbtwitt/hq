@@ -23,8 +23,12 @@ export const HqUtils = {
                 parseInt(q[5]),
                 parseFloat(q[6]));
 
-            if (hq.close != hq.adjClose) {  // split
+            if (hq.close != hq.adjClose) {  // share split
+                let split = hq.adjClose / hq.close;
                 hq.close = hq.adjClose;
+                hq.high *= split;
+                hq.low *= split;
+                hq.open *= split;
             }
 
             hqs.push(hq);
