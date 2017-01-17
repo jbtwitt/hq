@@ -1,7 +1,10 @@
-<span *ngIf="sma != null">
+<div style="float: left" *ngIf="sma != null">
   <select>
     <option *ngFor="let avg of sma">
       {{ avg | number }}
     </option>
   </select>
-</span>
+  <span [ngClass]="{upTrend: trend=='Up Trend', dnTrend: trend=='Dn Trend'}">
+  {{ trend }}
+  </span>
+</div>

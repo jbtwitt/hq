@@ -9,8 +9,8 @@
     </td>
     <th>date</th>
     <th>close</th>
-    <th>sma50</th>
     <th>sma5</th>
+    <th>sma50</th>
     <th>b2b</th>
     <th>candlestick</th>
     <th></th>
@@ -32,8 +32,8 @@
     <td [ngClass]="{up: hqTicker.hqs[0].close > hqTicker.hqs[0].prevClose, down: hqTicker.hqs[0].close < hqTicker.hqs[0].prevClose}">
       {{hqTicker.hqs[dayIndex].close | number}}</td>
 
-    <td><app-sma [hq-ticker]="hqTicker" [days]="50" [day-index]="dayIndex"></app-sma></td>
     <td><app-sma [hq-ticker]="hqTicker" [day-index]="dayIndex"></app-sma></td>
+    <td><app-sma [hq-ticker]="hqTicker" [days]="50" [day-index]="dayIndex"></app-sma></td>
     <td><app-hq-b2b [hq-ticker]="hqTicker" [day-index]="dayIndex"></app-hq-b2b></td>
     <td><app-stick [hq-ticker]="hqTicker" [day-index]="dayIndex"></app-stick></td>
 

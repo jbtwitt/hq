@@ -1,0 +1,10 @@
+span.dnTrend {
+    text-decoration: underline;
+    color: red;
+    text-align: left;
+}
+span.upTrend {
+    text-decoration: underline;
+    color: green;
+    text-align: left;
+}
