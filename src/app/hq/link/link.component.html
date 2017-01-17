@@ -1,0 +1,12 @@
+<div style="float: left" *ngIf="hqTicker != null">
+  <a target="blank" md-tooltip="View Yahoo Summary"
+      href="https://finance.yahoo.com/quote/{{hqTicker.ticker}}?p={{hqTicker.ticker}}" md-button>{{hqTicker.ticker}}</a>
+  <a target="blank" md-tooltip="View Yahoo Chart {{hqTicker.ticker}}"
+      href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon></a>
+
+  <span>{{hqTicker.hqs[dayIndex].date}}</span>
+  
+  <span [ngClass]="{up: hqTicker.hqs[dayIndex].close > hqTicker.hqs[dayIndex].prevClose, down: hqTicker.hqs[dayIndex].close < hqTicker.hqs[dayIndex].prevClose}">
+      {{hqTicker.hqs[dayIndex].close | number}}
+  </span>
+</div>

@@ -13,6 +13,7 @@ import { EngulfingComponent } from './engulfing/engulfing.component';
 import { B2bComponent } from './b2b/b2b.component';
 import { StickComponent } from './stick/stick.component';
 import { SmaComponent } from './sma/sma.component';
+import { LinkComponent } from './link/link.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { SmaComponent } from './sma/sma.component';
     EngulfingComponent,
     B2bComponent,
     StickComponent,
-    SmaComponent
+    SmaComponent,
+    LinkComponent
   ],
   providers: [
     HqDataService

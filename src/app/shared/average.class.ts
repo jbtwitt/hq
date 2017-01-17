@@ -1,5 +1,9 @@
 import { Hq, HqTicker } from '../models/hq.model';
 
+export class SMA {
+    avgs: number[];
+    trend: string;
+}
 export const average = {
     //simple moving average
     sma(hqTicker: HqTicker, days: number=5, segs: number=5, dayIndex: number=0): number[] {
