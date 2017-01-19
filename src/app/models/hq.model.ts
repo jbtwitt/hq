@@ -1,3 +1,5 @@
+import { IqTicker } from './iq.model';
+
 export class HqTicker {
     ticker: string;
     hqs: Hq[];
@@ -37,4 +39,9 @@ export class Hq {
         this.volume = volume;
         this.adjClose = adjClose;        
     }
+}
+export class IqHqTicker {
+  iqTicker: IqTicker;
+  hq: Hq;
+  hqTail: number;
 }

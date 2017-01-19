@@ -1,3 +1,10 @@
-<p>
-  iq-hq works!
-</p>
+
+<button md-raised-button (click)="btnRun()">Run</button>
+<div *ngFor="let iqHq of iqHqTickers">
+  {{iqHq.iqTicker.ticker}} {{iqHq.hq.close}} {{iqHq.hq.high}} {{iqHq.hq.low}}
+   {{iqHq.iqTicker.prevClose}}
+   {{iqHq.hqTail | percent}}
+   {{(iqHq.hq.high-iqHq.hq.close)/iqHq.iqTicker.prevClose | percent}}
+   {{(iqHq.hq.high-iqHq.hq.low)/iqHq.iqTicker.prevClose | percent}}
+   {{iqHq.hq.volume}}
+</div>
