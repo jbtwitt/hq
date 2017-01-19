@@ -14,6 +14,7 @@ import { B2bComponent } from './b2b/b2b.component';
 import { StickComponent } from './stick/stick.component';
 import { SmaComponent } from './sma/sma.component';
 import { LinkComponent } from './link/link.component';
+import { IqHqComponent } from './iq-hq/iq-hq.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { LinkComponent } from './link/link.component';
     B2bComponent,
     StickComponent,
     SmaComponent,
-    LinkComponent
+    LinkComponent,
+    IqHqComponent
   ],
   providers: [
     HqDataService

@@ -1,44 +1,13 @@
 <md-tab-group>
 
   <md-tab label="Tickers">
-    <md-card>
-      <md-card-content>
-        <app-ticker-list [hq-tickers]="hqTickers"></app-ticker-list>
-      </md-card-content>
-    </md-card>
+    <md-card><md-card-content>
+      <app-ticker-list [hq-tickers]="hqTickers"></app-ticker-list>
+    </md-card-content></md-card>
   </md-tab>
 
-  <!--<md-tab label="Tickers">
-    <md-card>
-      <md-card-content>
-        <table>
-          <tr *ngFor="let hqTicker of hqTickers">
-            <td>
-            <a target="blank" md-tooltip="View Yahoo Summary"
-               href="https://finance.yahoo.com/quote/{{hqTicker.ticker}}?p={{hqTicker.ticker}}" md-button>{{hqTicker.ticker}}</a>
-            <a target="blank" md-tooltip="View Yahoo Chart"
-               href="https://finance.yahoo.com/chart/{{hqTicker.ticker}}" md-mini-fab><md-icon>show_chart</md-icon></a>
-            </td>
-            <td>{{hqTicker.hqs[0].date}}</td>
-            <td [ngClass]="{up: hqTicker.hqs[0].close > hqTicker.hqs[0].prevClose, down: hqTicker.hqs[0].close < hqTicker.hqs[0].prevClose}">
-              {{hqTicker.hqs[0].close | number}}</td>
-
-            <td class="down" md-tooltip="lowest days in last 5">
-              {{hqStatService.hqStatHighLowInLastDays(hqTicker.hqs).lowInLastDays}}</td>
-            <td class="up" md-tooltip="highest days in last 5">
-              {{hqStatService.hqStatHighLowInLastDays(hqTicker.hqs).highInLastDays}}</td>
-            <td class="down" md-tooltip="Lowest date: {{hqTicker.hqs[hqTicker.hqMinIndex].date}}">{{hqTicker.hqMinIndex}}</td>
-            <td class="up" md-tooltip="Highest date: {{hqTicker.hqs[hqTicker.hqMaxIndex].date}}">{{hqTicker.hqMaxIndex}}</td>
-          </tr>
-        </table>
-      </md-card-content>
-    </md-card>
-  </md-tab>-->
-
-
   <md-tab label="HQ({{hqLen-2}}) CSV">
-  <md-card>
-    <md-card-content>
+    <md-card><md-card-content>
     <table>
       <tr>
         <th valign="top">
@@ -48,20 +17,22 @@
           </md-list-item>
         </md-list>
       </th>
-      <td>
-        <app-hq-csv [hq-ticker]="hqTicker"></app-hq-csv>
-      </td>
+      <td><app-hq-csv [hq-ticker]="hqTicker"></app-hq-csv></td>
       </tr>
     </table>
-    </md-card-content>
-  </md-card>
+    </md-card-content></md-card>
   </md-tab>
 
+  <md-tab label="IQ-HQ">
+    <md-card><md-card-content>
+      <app-iq-hq></app-iq-hq>
+    </md-card-content></md-card>
+  </md-tab>
 
-  <md-tab label="Inverse">
-    <md-card>
-    <button md-raised-button (click)="btnInverse()">Inverse</button>
-    </md-card>
+  <md-tab label="Group">
+    <md-card><md-card-content>
+      <button md-raised-button (click)="btnInverse()">Inverse</button>
+    </md-card-content></md-card>
   </md-tab>
   <!--<md-tab>
     <template md-tab-label>
