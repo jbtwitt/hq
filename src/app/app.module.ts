@@ -9,7 +9,7 @@ import { HqModule } from './hq/hq.module';
 import { IqModule } from './iq/iq.module';
 import { AppComponent } from './app.component';
 
-// import { HqDataService } from './shared/hq.service';
+import { WsService } from './services/ws.service';
 import { HqStatService } from './shared/hq-stat.service';
 import { HqStatComponent } from './hq-stat/hq-stat.component';
 
@@ -27,7 +27,7 @@ import { HqStatComponent } from './hq-stat/hq-stat.component';
     AppRoutingModule
   ],
   providers: [
-    HqStatService
+    HqStatService, WsService,
   ],
   bootstrap: [AppComponent]
 })
