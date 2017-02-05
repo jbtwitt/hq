@@ -50,6 +50,7 @@ module.exports = (ticker) => {
     tst: () => { parser(); },
     // historyQ: () => data
     historyQ: (callback) => { robot(yahoo, callback); },
-    intraday1d: (callback) => { robot(yahooIntraday1d, callback); }
+    intraday1d: (callback) => { robot(yahooIntraday1d, callback); },
+    proxy: (url, callback) => { robot(url, callback) },
   }
 }

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { environment } from '../../environments/environment';
 import { Hq, HqTicker } from '../models/hq.model';
 import { HqUtils } from '../shared/hq-utils';
+import { WsService } from '../services/ws.service';
 
 @Injectable()
 
@@ -15,11 +16,14 @@ export class HqDataService {
     private _lookupDataUrl = '';//CONFIG.baseUrls.lookupServices;
     //var google = `http://www.google.com/finance/historical?startdate=Jan 1,2015&enddate=Mar 6,2016&output=csv`;
 
-    constructor(private _http: Http) { }
+    constructor(
+        private wsService: WsService,
+        private _http: Http) { }
 
     getHqTicker(ticker: string): Promise<HqTicker> {
         return new Promise((resolve, reject) => {
-            this.getCsv(ticker) // get HQ csv
+            // this.getCsv(ticker) // get HQ csv
+            this.wsService.hqProxy(ticker)
                 .subscribe(csv => {
                     let hqTicker = new HqTicker(ticker);
                     hqTicker.csv = csv;
@@ -57,7 +61,8 @@ export class HqDataService {
                 let hqTickers: HqTicker[] = new Array<HqTicker>();
                 data.forEach(ticker => {
                     let hqTicker = new HqTicker(ticker);
-                    this.getCsv(ticker) // get HQ csv
+                    // this.getCsv(ticker) // get HQ csv
+                    this.wsService.hqProxy(ticker)
                         .subscribe(csv => {
                             hqTicker.csv = csv;
                             hqTicker.hqs = HqUtils.parseHqCsv(csv);

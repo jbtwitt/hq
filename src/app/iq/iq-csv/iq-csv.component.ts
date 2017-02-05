@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Iq, IqTicker } from '../../models/iq.model';
 import { Hq } from '../../models/hq.model';
 import { HqDataService } from '../../shared/hq.service';
+import { WsService } from '../../services/ws.service';
 import { HqUtils } from '../../shared/hq-utils';
 
 @Component({
@@ -20,6 +21,7 @@ export class IqCsvComponent implements OnInit {
   hq: Hq;
 
   constructor(
+    private wsService: WsService,
     private hqDataService: HqDataService
   ) { }
 
@@ -28,7 +30,8 @@ export class IqCsvComponent implements OnInit {
 
   btnTickerIq(ticker): void {
     this.selectedTicker = ticker;
-    this.hqDataService.getCsv(`${ticker}_1d`) // get IQ csv
+    // this.hqDataService.getCsv(`${ticker}_1d`) // get IQ csv
+    this.wsService.iqProxy(ticker) // get IQ csv
       .subscribe(csv => {
           this.csv = csv;
           this.iqTicker = HqUtils.parseIqCsv(csv);
