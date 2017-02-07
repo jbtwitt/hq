@@ -4,7 +4,33 @@ import { Observable  } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { environment } from '../../environments/environment';
 
+export const Const = {
+    iq: {
+        timestamp: 0,
+        close: 1,
+        high: 2,
+        low: 3,
+        open: 4,
+        volume: 5,
+    },
+    hq: {
+        date: 0,
+        open: 1,
+        high: 2,
+        low: 3,
+        close: 4,
+        volume: 5,
+        adj: 6,
+    },
+    // url: {
+    //     iq: `http://chartapi.finance.yahoo.com/instrument/1.0/${ticker}/chartdata;type=quote;range=1d/csv`,
+    // }
+}
+
 export const HqUtils = {
+
+    iqTimestamp: (tick): Date => new Date(1000 * tick),
+
     hqSortByClose: (_hqs: Hq[]): Hq[] => {
         let hqs = _hqs.slice(0);
         hqs.sort((a: Hq, b: Hq) => a.close - b.close);
