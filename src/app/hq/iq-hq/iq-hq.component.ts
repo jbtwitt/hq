@@ -8,13 +8,15 @@ import { HqUtils } from '../../shared/hq-utils';
 
 @Component({
   selector: 'app-iq-hq',
-  templateUrl: './iq-hq.component.html',
+  template: require('./iq-hq.component.html'),
   styleUrls: ['./iq-hq.component.css']
 })
 export class IqHqComponent implements OnInit {
   @Input('hq-tickers') hqTickers: HqTicker[];
   tickers: string[];
   iqHqTickers: IqHqTicker[];
+
+  csv: string='';
 
   constructor(
     private hqDataService: HqDataService
@@ -25,6 +27,22 @@ export class IqHqComponent implements OnInit {
   }
   ngOnChanges() {}
 
+  btnWsIq(ticker) {
+    let url = `http://chartapi.finance.yahoo.com/instrument/1.0/${ticker}/chartdata;type=quote;range=1d/csv`;
+    let observable = HqUtils.intervalWsProxy(url, 10000);
+    observable
+      .subscribe(csv => {
+        let lines = csv.split('\n');
+        console.log(lines.length);
+        console.log(lines[lines.length-1]);
+        let iqs = [];
+        for(let i=17; i<lines.length; i++) {
+            iqs.push(lines[i].split(','));
+        }
+        // this.csv += "\n" + new Date(1000 * quotes[0][_timestamp]).toString();
+        // console.log(this.csv);
+      });
+  }
   btnRun() {
     if (this.hqTickers != null) {
       this.getIqHqTickers();

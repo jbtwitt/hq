@@ -1,5 +1,7 @@
 import { Hq } from '../models/hq.model';
 import { Iq, IqTicker } from '../models/iq.model';
+import { Observable  } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { environment } from '../../environments/environment';
 
 export const HqUtils = {
@@ -130,5 +132,30 @@ export const HqUtils = {
             _iqs.push(_iq);
         }
         return _iqs;
+    },
+    connectWsProxy(url: string): Observable<any> {
+        return Observable.create((observer: Observer<string>) => {
+            const ws = new WebSocket(environment.wsProxyUrl);
+            ws.onopen = (event) => {
+                ws.send(url);
+            };
+            ws.onmessage = (message) => {
+                observer.next(message.data);
+            };
+        });
+    },
+    intervalWsProxy(url: string, interval:number=5000): Observable<any> {
+        return Observable.create((observer: Observer<string>) => {
+            const ws = new WebSocket(environment.wsProxyUrl);
+            ws.onopen = (event) => {
+                ws.send(url);
+            };
+            ws.onmessage = (message) => {
+                observer.next(message.data);
+            };
+            let handle = setInterval(() => {
+                ws.send(url);
+            }, interval);
+        });
     }
 };

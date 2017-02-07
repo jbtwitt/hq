@@ -31,7 +31,7 @@ export class IqCsvComponent implements OnInit {
   btnTickerIq(ticker): void {
     this.selectedTicker = ticker;
     // this.hqDataService.getCsv(`${ticker}_1d`) // get IQ csv
-    this.wsService.iqProxy(ticker) // get IQ csv
+    this.wsService.iqWsProxy(ticker) // get IQ csv
       .subscribe(csv => {
           this.csv = csv;
           this.iqTicker = HqUtils.parseIqCsv(csv);

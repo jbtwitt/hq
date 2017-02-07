@@ -1,3 +1,11 @@
+export const Const = {
+    timestamp: 0,
+    close: 1,
+    high: 2,
+    low: 3,
+    open: 4,
+    volume: 5,
+}
 export class Iq {
     tick: number;
     timestamp: Date;

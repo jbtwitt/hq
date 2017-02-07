@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer  } from 'rxjs/RX';
 // import { Observable  } from 'rxjs/Observable';
 // import { Observer } from 'rxjs/Observer';
-import { WsCommand, WsInterace } from '../models/iq.model';
+
+import { environment } from '../../environments/environment';
+import { HqUtils } from '../shared/hq-utils';
 
 @Injectable()
 
@@ -24,12 +26,9 @@ export class WsService {
         if (diffDays < 300) startYear --;
         this.hqUrl = `http://real-chart.finance.yahoo.com/table.csv?s={ticker}&a=00&b=1&c=${startYear}&d=${+today[0]-1}&e=${today[1]}&f=${today[2]}&g=d&ignore=.csv`;
     }
-    iqProxy(ticker): Observable<any> {
+    iqWsProxy(ticker): Observable<any> {
         let url = `http://chartapi.finance.yahoo.com/instrument/1.0/${ticker}/chartdata;type=quote;range=1d/csv`;
         return Observable.create((observer: Observer<string>) => {
-                // this.wsProxy.onopen = (event) => {
-                //     this.wsProxy.send(url);
-                // };
                 this.wsProxy.send(url);
                 this.wsProxy.onmessage = (message) => {
                     observer.next(message.data);
@@ -38,22 +37,18 @@ export class WsService {
     }
     hqWsProxy(ticker): Observable<any> {
         return Observable.create((observer: Observer<string>) => {
-                this.wsProxy.send(this.hqUrl.replace('{ticker}', ticker));
-                this.wsProxy.onmessage = (message) => {
-                    observer.next(message.data);
-                };
+            this.wsProxy.send(this.hqUrl.replace('{ticker}', ticker));
+            this.wsProxy.onmessage = (message) => {
+                observer.next(message.data);
+            };
         });
     }
     hqProxy(ticker): Observable<any> {
-        return Observable.create((observer: Observer<string>) => {
-                const ws = new WebSocket("ws://localhost:3030");
-                ws.onopen = (event) => {
-                    ws.send(this.hqUrl.replace('{ticker}', ticker));
-                };
-                ws.onmessage = (message) => {
-                    observer.next(message.data);
-                };
-        });
+        return HqUtils.connectWsProxy(this.hqUrl.replace('{ticker}', ticker));
+    }
+    iqProxy(ticker): Observable<any> {
+        let url = `http://chartapi.finance.yahoo.com/instrument/1.0/${ticker}/chartdata;type=quote;range=1d/csv`;
+        return HqUtils.connectWsProxy(url);
     }
     rxjsWebSocketSubject(ticker) {
         let url = `http://chartapi.finance.yahoo.com/instrument/1.0/${ticker}/chartdata;type=quote;range=1d/csv`;
@@ -64,20 +59,6 @@ export class WsService {
             () => console.log('complete')
         );
         subject.next(url);
-    }
-    wsStream() {
-        const wsInterface: Observable<WsInterace>
-            = Observable.create((observer: Observer<WsInterace>) => {
-                const ws = new WebSocket("ws://localhost:3030");
-                ws.addEventListener("message", (message) => {
-                    // console.log(parseInt(message.data, 10));
-                    observer.next(message.data);
-            });
-        });
-        wsInterface
-            // .map((num) => num * 2)
-            // .filter((num) => num > 20)
-            .subscribe((num) => console.log(num));
     }
     async_observable_samples(tst) {
 

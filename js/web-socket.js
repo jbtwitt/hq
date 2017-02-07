@@ -11,7 +11,7 @@ const wss = new ws.Server({
 
 wss.on('connection', ws => {
 
-	console.log(`web socket connection opened on port ${wsPort}`);
+	console.log(`-->web socket connection opened on port ${wsPort}`);
 
 	let counter = 0;
 	let handle;
@@ -24,14 +24,23 @@ wss.on('connection', ws => {
         // console.log('received message-> ' + message)
         let cmd = JSON.parse(message);
         console.log(cmd);
-        robot(cmd.ticker).intraday1d((csvData) => {
-            // console.log(csvData);
-            ws.send(csvData);
-        });
+        switch(cmd.type) {
+            case 'wsProxy':
+                robot().proxy(cmd.payload, (response) => {
+                    ws.send(response);
+                });
+                break;
+            case 'ticker':
+                robot(cmd.payload).intraday1d((csvData) => {
+                    // console.log(csvData);
+                    ws.send(csvData);
+                });
+                break;
+        }
     });
-	// handle = setInterval(() => {
-	// 	ws.send(JSON.stringify(counter++));
-	// }, 5000);
+	handle = setInterval(() => {
+		ws.send(JSON.stringify(counter++));
+	}, 5000);
 
 });
 

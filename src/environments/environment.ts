@@ -11,5 +11,6 @@ export const environment = {
     inverseTickers: "inverseTickersArray"
   },
   csvFolder: "data/csv",
-  hqParseLength: 60
+  hqParseLength: 60,
+  wsProxyUrl: "ws://localhost:3030",
 };
