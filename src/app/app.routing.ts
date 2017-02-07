@@ -1,17 +1,17 @@
 import { NgModule, ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HqComponent } from './hq/hq.component';
+import { QComponent } from './q/q.component';
 import { HqStatComponent } from './hq-stat/hq-stat.component';
 import { IqComponent } from './iq/iq.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'hq',
+    redirectTo: 'q',
     pathMatch: 'full'
   },
-  // { path: 'hq', component: HqComponent },
+  { path: 'q', component: QComponent },
   { path: 'hq-stat', component: HqStatComponent },
   // { path: 'iq', component: IqComponent },
 ];

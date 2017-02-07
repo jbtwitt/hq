@@ -5,6 +5,7 @@ import 'hammerjs';
 import { MaterialModule } from '@angular/material';
 
 import { AppRoutingModule } from './app.routing';
+import { QModule } from './q/q.module';
 import { HqModule } from './hq/hq.module';
 import { IqModule } from './iq/iq.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { HqStatComponent } from './hq-stat/hq-stat.component';
     BrowserModule,
     MaterialModule.forRoot(),
     HttpModule,
+    QModule,
     HqModule,
     IqModule,
     AppRoutingModule
